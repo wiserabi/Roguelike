@@ -819,11 +819,13 @@ void printCharacterStatus()
     wprintf(L"이름:%S, 레벨:%d", player.name, player.level);
 
     gotoxy(cnt++, COLS + 2, L' ');
-    wprintf(L"무기: %S, 열쇠:% d", player.weapon->name, player.keys);
+    wprintf(L"무기: % S, 열쇠:% d", player.weapon->name, player.keys);
 
-    gotoxy(cnt++, COLS + 2, L' ');
-    wprintf(L"무기 atk,pen,def,block: %d, %d, %d, %d", 
-        player.weapon->atk, player.weapon->penetration, player.weapon->def, player.weapon->blockChance);
+    if (player.weapon != NULL) {
+        gotoxy(cnt++, COLS + 2, L' ');
+        wprintf(L"무기 atk,pen,def,block: %d, %d, %d, %d",
+            player.weapon->atk, player.weapon->penetration, player.weapon->def, player.weapon->blockChance);
+    }
 
     gotoxy(cnt++, COLS + 2, L' ');
     wprintf(L"경험치: %d/%d", player.curExp, player.nextExp);
