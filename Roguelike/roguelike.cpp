@@ -52,7 +52,7 @@ enum job {
 struct Weapon
 {
     char name[MAX_LINE_LENGTH];
-    int damage;
+    int atk;
     int penetration;
     int def;
     int blockChance;
@@ -318,7 +318,7 @@ void collisionCheck(int ny, int nx, Monster* m)
         item = getRandomItem();
         gotoxy(14, COLS + 2, L' ');
         wprintf(L"무기: %S, 공격력: %d, 관통력: %d%%, 방어력:%d, 블럭율:%d%% 획득!\n", 
-            weapons[item].name, weapons[item].damage, weapons[item].penetration, weapons[item].def, weapons[item].blockChance);
+            weapons[item].name, weapons[item].atk, weapons[item].penetration, weapons[item].def, weapons[item].blockChance);
 
         //맨손이거나 더 높은 등급일 경우 자동 장착
         if (player.weapon == NULL || player.weapon < weapons + item) {
@@ -816,13 +816,14 @@ void printCharacterStatus()
     }
     
     gotoxy(cnt++, COLS + 2, L' ');
-    wprintf(L"이름:%S", player.name);
+    wprintf(L"이름:%S, 레벨:%d", player.name, player.level);
 
     gotoxy(cnt++, COLS + 2, L' ');
-    wprintf(L"레벨:%d", player.level);
+    wprintf(L"무기: %S, 열쇠:% d", player.weapon->name, player.keys);
 
     gotoxy(cnt++, COLS + 2, L' ');
-    wprintf(L"무기% S, 열쇠:% d", player.weapon->name, player.keys);
+    wprintf(L"무기 atk,pen,def,block: %d, %d, %d, %d", 
+        player.weapon->atk, player.weapon->penetration, player.weapon->def, player.weapon->blockChance);
 
     gotoxy(cnt++, COLS + 2, L' ');
     wprintf(L"경험치: %d/%d", player.curExp, player.nextExp);
@@ -956,7 +957,7 @@ int startBattle(Monster* mob, int turn, Monster* m, int mType)
             int pDef;
             int mDef;
             if (player.weapon != NULL) {
-                pAtk = (player.atk + player.weapon->damage) * atkMult * atkBuff;
+                pAtk = (player.atk + player.weapon->atk) * atkMult * atkBuff;
                 pDef = int((float)(player.def + player.weapon->def) / 100.0f * (100.0f - mob->penetration));
                 mDef = int((float)mob->def / 100.0f * (100.0f - player.penetration - player.weapon->penetration));
             }
@@ -1031,7 +1032,7 @@ int startBattle(Monster* mob, int turn, Monster* m, int mType)
             int pDef;
             int pBlockSuccess;
             if (player.weapon != NULL) {
-                pAtk = (player.atk + player.weapon->damage) * atkMult * atkBuff;
+                pAtk = (player.atk + player.weapon->atk) * atkMult * atkBuff;
                 pDef = int((float)(player.def + player.weapon->def) / 100.0f * (100.0f - mob->penetration));
                 pBlockSuccess = (rand() % 100 < (player.blockChance + player.weapon->blockChance));
             }
@@ -1199,7 +1200,7 @@ int getRandomItem()
                 strcpy_s(weapons[i].name, MAX_LINE_LENGTH, temp);
 
                 temp = strtok_s(NULL, ",", &token);
-                weapons[i].damage = atoi(temp);
+                weapons[i].atk = atoi(temp);
 
                 temp = strtok_s(NULL, ",", &token);
                 weapons[i].penetration = atoi(temp);
