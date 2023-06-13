@@ -1,0 +1,15 @@
+Bronze sword,50,0,0,0
+Steel sword,100,0,0,0
+Cold iron point,150,0,0,0
+Glamdring,300,0,0,0
+Excalibur,700,0,0,0
+Light Spear,50,10,0,0
+Reinforced Spear,80,10,0,0
+Spear of Might,120,20,0,0
+Piece Maker,240,30,0,0
+Hero’s Harpoon,400,40,0,0
+Wooden shield,0,0,10,15
+Bronze shield,0,0,20,15
+Iron shield,20,0,40,20
+Crimson Guard,50,0,80,25
+Aegis of the immortal,100,0,160,35
