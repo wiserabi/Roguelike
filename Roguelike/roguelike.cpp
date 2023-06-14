@@ -347,6 +347,7 @@ void collisionCheck(int ny, int nx, Monster* m)
         grid[playerY][playerX] = 0;
 
         dungeonDepth++;
+        initGrid();
         genDungeon();
         
         spawnChance = spawnChance + 10;
