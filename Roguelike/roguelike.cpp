@@ -99,7 +99,7 @@ int playerX;
 int spawnChance = 80;
 int dungeonDepth = 1;
 int monsterNumber = 0;
-int weaponNumber = 0;
+bool weaponLoaded = false;
 int item = -1;
 int sleeptime = 100;
 
@@ -570,7 +570,7 @@ void chooseMenu() {
                 spawnChance = 80;
                 dungeonDepth = 1;
                 monsterNumber = 0;
-                weaponNumber = 0;
+                weaponLoaded = false;
 
                 initGrid();
                 genDungeon();
@@ -1193,7 +1193,7 @@ void gameInfo(char key)
 
 int getRandomItem()
 {
-    if(weaponNumber == 0){//한번도 로드된적 없으면 로드
+    if(!weaponLoaded){//한번도 로드된적 없으면 로드
         FILE* fp = NULL;
 
         if (fopen_s(&fp, "weapons.txt", "r") == NULL) {
@@ -1217,6 +1217,7 @@ int getRandomItem()
                 weapons[i].blockChance = atoi(temp);
             }
             fclose(fp);
+            weaponLoaded = true;
         }
     }
     //각각의 직업에 알맞는 5개 중에 1개의 무기 주기
