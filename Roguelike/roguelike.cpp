@@ -347,6 +347,7 @@ void collisionCheck(int ny, int nx, Monster* m)
         grid[playerY][playerX] = 0;
 
         dungeonDepth++;
+        initGrid();
         genDungeon();
         
         spawnChance = spawnChance + 10;
@@ -819,7 +820,8 @@ void printCharacterStatus()
     wprintf(L"이름:%S, 레벨:%d", player.name, player.level);
 
     gotoxy(cnt++, COLS + 2, L' ');
-    wprintf(L"무기: % S, 열쇠:% d", player.weapon->name, player.keys);
+    wprintf(L"무기: %S, 열쇠:%d", 
+        (player.weapon == NULL) ? "NONE" : player.weapon->name, player.keys);
 
     if (player.weapon != NULL) {
         gotoxy(cnt++, COLS + 2, L' ');
