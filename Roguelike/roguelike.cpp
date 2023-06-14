@@ -981,7 +981,7 @@ int startBattle(Monster* mob, int turn, Monster* m, int mType)
 
             int mBlockSuccess = (rand() % 100 < mob->blockChance);
             if (!mBlockSuccess) {
-                int temp = player.atk - mDef;
+                int temp = pAtk - mDef;
                 if (temp > 0) {
                     mob->hp -= temp;
                 }
