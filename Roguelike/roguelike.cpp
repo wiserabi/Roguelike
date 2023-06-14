@@ -739,10 +739,10 @@ void createCharacter()
                     player.curHp = 200;
                     player.atk = 20;
                     player.blockChance = 10;
-                    player.counterChance = 0;
-                    player.penetration = 50;
-                    player.def = 20;
-                    player.regen = 10;
+                    player.counterChance = 90;
+                    player.penetration = 0;
+                    player.def = 30;
+                    player.regen = 20;
                     player.fleeChance = 50;
                     player.level = 1;
                     player.curExp = 0;
@@ -1103,17 +1103,17 @@ int startBattle(Monster* mob, int turn, Monster* m, int mType)
         }
         setColor(BLACK, BLACK);
         gotoxy(lineCnt, COLS + 2, L' ');
-        wprintf(L"                            ");
+        wprintf(L"                               ");
         gotoxy(lineCnt + 1, COLS + 2, L' ');
-        wprintf(L"                            ");
+        wprintf(L"                               ");
         gotoxy(lineCnt + 2, COLS + 2, L' ');
-        wprintf(L"                            ");
+        wprintf(L"                               ");
         gotoxy(lineCnt + 3, COLS + 2, L' ');
-        wprintf(L"                            ");
+        wprintf(L"                               ");
         gotoxy(lineCnt + 4, COLS + 2, L' ');
-        wprintf(L"                            ");
+        wprintf(L"                               ");
         gotoxy(lineCnt + 5, COLS + 2, L' ');
-        wprintf(L"                            ");
+        wprintf(L"                               ");
 
         setColor(BLACK, WHITE);
     }
@@ -1134,6 +1134,17 @@ void checkLevelUp()
         player.atk += 10 * log(player.level + 1);
         player.hp += 50 * log(player.level + 1) + player.level;
         player.curHp = player.hp;
+        if (player.job == 1) {
+            player.atk += 8;
+        }
+        else if (player.job == 2) {
+            player.atk += 4;
+            player.hp += 5;
+        }
+        else if (player.job == 3) {
+            player.def += 5;
+            player.hp += 5;
+        }
     }
 }
 
