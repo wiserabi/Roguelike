@@ -940,7 +940,7 @@ int startBattle(Monster* mob, int turn, Monster* m, int mType)
         if (turn == 1) {
             //player 버프 발동
             if (player.buff == 1) {
-                atkBuff = 1.1f;
+                atkBuff = 1.3f;
             }
             else if (player.buff == 2) {
                 regenBuff = int(player.hp / 20);
