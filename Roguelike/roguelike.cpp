@@ -1378,8 +1378,9 @@ void loadGame()
         player.atkMult = atoi(line);
 
         fgets(line, MAX_LINE_LENGTH, fp);
-        if (atoi(line) > -1) {
-            player.weapon = weapons + atoi(line);
+        item = atoi(line);
+        if (item > -1) {
+            player.weapon = weapons + item;
         }
         else {
             player.weapon = NULL;
