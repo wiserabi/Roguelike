@@ -315,13 +315,14 @@ void collisionCheck(int ny, int nx, Monster* m)
         player.keys--;
 
 
-        item = getRandomItem();
+        int found = getRandomItem();
         gotoxy(14, COLS + 2, L' ');
         wprintf(L"무기: %S, 공격력: %d, 관통력: %d%%, 방어력:%d, 블럭율:%d%% 획득!\n", 
-            weapons[item].name, weapons[item].atk, weapons[item].penetration, weapons[item].def, weapons[item].blockChance);
+            weapons[found].name, weapons[found].atk, weapons[found].penetration, weapons[found].def, weapons[found].blockChance);
 
         //맨손이거나 더 높은 등급일 경우 자동 장착
-        if (player.weapon == NULL || player.weapon < weapons + item) {
+        if (player.weapon == NULL || found > item) {
+            item = found;
             player.weapon = weapons + item;
         }
 
